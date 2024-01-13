@@ -22,6 +22,25 @@ def ArticleSummary(req: func.HttpRequest) -> func.HttpResponse:
             status_code=200,
             mimetype="application/json"
     )
+
+@app.route(route="SayHello")
+def SayHello(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function processed a request.')
+
+    name = req.params.get('name')
+    if not name:
+        try:
+            req_body = req.get_json()
+        except ValueError:
+            pass
+        else:
+            name = req_body.get('name')
+
+    return func.HttpResponse(
+            body = json.dumps({"text":"Hello."}),
+            status_code=200,
+            mimetype="application/json"
+    )
     
     # if name:
     #     return func.HttpResponse(json.loads(f'{"text":"Hello, {name}. This HTTP triggered function executed successfully."}'))
