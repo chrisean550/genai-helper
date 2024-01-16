@@ -36,14 +36,14 @@ def ArticleSummarizer(req: func.HttpRequest, client) -> func.HttpResponse:
         )
 
         result = completion.choices[0].message.content
-        audio = client.audio.speech.create(
-            model = "tts-1",
-            voice = "shimmer",
-            input = result
-        )
+        # audio = client.audio.speech.create(
+        #     model = "tts-1",
+        #     voice = "shimmer",
+        #     input = result
+        # )
 
         return func.HttpResponse(
-            body = json.dumps({"res":f"{result}", "audio":f"{audio}"}),
+            body = json.dumps({"res":f"{result}"}),
             status_code=200,
             mimetype = "application/json"
         )
