@@ -2,6 +2,62 @@ import azure.functions as func
 import urllib.parse
 import urllib.request
 import json
+import os
+from openai import OpenAI
+
+
+# Authenticate session with Open AI client
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# Setting up json configs
+f = open('routes/article_summary/config.json')
+configs = json.load(f)
+f.close()
+
+def ArticleSummarizerv2(req: func.HttpRequest) -> func.HttpResponse:
+    return initiateThread(req)
+
+
+def initiateThread(req: func.HttpRequest) -> func.HttpResponse:
+    article = req.params.get('article')
+    if not article:
+        try:
+            req_body = req.get_json()
+        except ValueError:
+            pass
+        else:
+            article = req_body.get('article')
+
+    if article:
+        article_content = urllib.parse.unquote(article)
+
+    run_res = client.beta.threads.create_and_run(
+        assistant_id = "asst_FVSL4rY0HlkaV8PBjfuE2Xin",
+        thread = {
+           "messages": [
+               {
+                   "role": "user",
+                   "content": f"{article_content}"   
+                }
+           ] 
+        }
+    )
+
+    return func.HttpResponse(
+        body = json.dumps({"res":f"{run_res}"}),
+        status_code=200,
+        mimetype = "application/json"
+    )
+
+def appendThread():
+    return
+
+def deleteThread():
+    return
+
+
+
+
 
 def ArticleSummarizer(req: func.HttpRequest, client) -> func.HttpResponse:
     article = req.params.get('article')
