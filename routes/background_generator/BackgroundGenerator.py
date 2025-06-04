@@ -6,6 +6,11 @@ from openai import OpenAI
 
 CLIENT = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+jrf45r-codex/add-backgroundgenerator-route
+# Constants for image generation model and size
+IMAGE_MODEL = "gpt-image-1"
+IMAGE_SIZE = "1290x2796"
+main
 
 def BackgroundGenerator(req: func.HttpRequest) -> func.HttpResponse:
     try:
@@ -28,9 +33,14 @@ def BackgroundGenerator(req: func.HttpRequest) -> func.HttpResponse:
 
     try:
         response = CLIENT.images.generate(
+          jrf45r-codex/add-backgroundgenerator-route
+            model=IMAGE_MODEL,
+            prompt=content,
+            size=IMAGE_SIZE,
             model="dall-e-3",
             prompt=content,
             size="1024x1024",
+        main
             quality="standard",
             n=1,
         )
