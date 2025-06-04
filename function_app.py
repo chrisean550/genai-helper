@@ -17,6 +17,7 @@ def ArticleSummary(req: func.HttpRequest) -> func.HttpResponse:
     return ArticleSummarizer(req)
 
 
+
 @app.function_name(name="BackgroundGenerator")
 @app.route(route="BackgroundGenerator")
 def BackgroundGenerator(req: func.HttpRequest) -> func.HttpResponse:

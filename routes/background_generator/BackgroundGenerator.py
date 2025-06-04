@@ -6,6 +6,7 @@ from openai import OpenAI
 
 CLIENT = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+
 # Constants for image generation model and size
 IMAGE_MODEL = "gpt-image-1"
 IMAGE_SIZE = "1290x2796"
