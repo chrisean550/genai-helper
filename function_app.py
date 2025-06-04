@@ -11,11 +11,14 @@ import json
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+@app.function_name(name="ArticleSummary")
 @app.route(route="ArticleSummary")
 def ArticleSummary(req: func.HttpRequest) -> func.HttpResponse:
     return ArticleSummarizer(req)
 
 
+
+@app.function_name(name="BackgroundGenerator")
 @app.route(route="BackgroundGenerator")
 def BackgroundGenerator(req: func.HttpRequest) -> func.HttpResponse:
     return BackgroundGeneratorFunc(req)
