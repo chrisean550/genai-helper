@@ -190,4 +190,5 @@ def getRunResult(run_res):
             run_id = run_res.id
         )
         status = run.status
+        attempts += 1
     return run
