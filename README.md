@@ -1,6 +1,6 @@
 # genai-helper
 
-This repository contains an Azure Functions app that wraps OpenAI APIs.
+This repository contains an Azure Functions app that wraps OpenAI APIs. The project targets Python **3.12** and Functions runtime `~4`.
 
 ## Routes
 
